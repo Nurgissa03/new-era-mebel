@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>New Era Mebel — телефон</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&amp;family=Manrope:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#07080A;color:#EEF0F3;font-family:'Manrope',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#8FB4FF}a:hover{color:#C8DAFF}
+@keyframes blink{50%{opacity:.25}}
+.pulse{animation:blink 1.6s infinite}
+@keyframes swap{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.swap{animation:swap .6s cubic-bezier(.2,.8,.2,1) both}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: #07080A; font-family: 'Manrope', system-ui, sans-serif; color: #EEF0F3">
+<canvas ref="{{cvRef}}" aria-hidden="true" style="position: absolute; inset: 0; width: 390px; height: 844px; display: block"></canvas>
+
+<header style="position: absolute; top: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; padding: 20px 20px 0">
+<div style="display: flex; align-items: center; gap: 10px">
+<svg width="24" height="24" viewBox="0 0 28 28" aria-hidden="true"><g fill="#FFFFFF"><rect x="2" y="2" width="4" height="4"></rect><rect x="12" y="2" width="4" height="4"></rect><rect x="22" y="2" width="4" height="4" fill="{{accent}}"></rect><rect x="2" y="12" width="4" height="4"></rect><rect x="12" y="12" width="4" height="4"></rect><rect x="22" y="12" width="4" height="4"></rect><rect x="2" y="22" width="4" height="4"></rect><rect x="12" y="22" width="4" height="4"></rect><rect x="22" y="22" width="4" height="4"></rect></g></svg>
+<span style="font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 15px">NEW ERA <span style="font-family: 'JetBrains Mono', monospace; font-weight: 400; font-size: 10px; letter-spacing: 0.28em; color: #9AA1AC">MEBEL</span></span>
+</div>
+<button type="button" aria-label="Меню" style="width: 44px; height: 44px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.14); background: rgba(7,8,10,0.5); color: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16"></path></svg>
+</button>
+</header>
+
+<div style="position: absolute; left: 20px; right: 20px; top: 404px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: inline-flex; align-self: flex-start; align-items: center; gap: 8px; padding: 7px 12px; border: 1px solid rgba(255,255,255,0.14); border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: #C5CAD2; background: rgba(7,8,10,0.55)">
+<span class="pulse" style="width: 7px; height: 7px; border-radius: 50%; background: {{accent}}"></span>
+<span>СОБИРАЕМ:</span><span style="color: #FFFFFF">{{label}}</span>
+</div>
+<h1 style="font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 38px; line-height: 1.04; letter-spacing: -0.035em; margin: 0">Соберём мебель<br>точно<span style="color: {{accent}}">.</span></h1>
+<p style="margin: 0; font-size: 16px; line-height: 1.55; color: #B4BAC4">Семейная бригада — отец и сын. Аккуратно, по инструкции, со своим инструментом.</p>
+<a href="#" style="display: flex; align-items: center; justify-content: space-between; min-height: 56px; padding: 0 22px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.14); background: rgba(12,14,18,0.75); color: #FFFFFF; text-decoration: none; font-weight: 600; margin-top: 4px">
+<span>Рассчитать стоимость</span>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+</a>
+</div>
+
+<div style="position: absolute; left: 12px; right: 12px; bottom: 16px; display: flex; gap: 8px; padding: 8px; border-radius: 999px; background: rgba(12,14,18,0.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,0.12)">
+<a href="tel:+70000000000" style="flex-grow: 1; display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.2); color: #FFFFFF; font-weight: 600; text-decoration: none">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"></path></svg>Позвонить</a>
+<a href="#" style="flex-grow: 1; display: flex; align-items: center; justify-content: center; min-height: 50px; border-radius: 999px; background: {{accent}}; color: #07080A; font-weight: 700; text-decoration: none">Оставить заявку</a>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#4C8DFF","options":["#4C8DFF","#FF7A1A","#2EE6A6","#FFFFFF"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    if (!this.cvRef) this.cvRef = { current: null };
+    const s = this.state || {};
+    const labels = ['ШКАФЫ', 'КРОВАТИ', 'КУХНИ', 'СТОЛЫ'];
+    return { cvRef: this.cvRef, accent: this.props.accent ?? '#4C8DFF', label: labels[s.scene || 0] };
+  }
+  componentDidMount() { this.dead = false; this.tryStart(0); }
+  componentWillUnmount() {
+    this.dead = true;
+    if (this.raf) cancelAnimationFrame(this.raf);
+    if (this.retry) clearTimeout(this.retry);
+    if (this.cleanup) this.cleanup();
+  }
+  tryStart(n) {
+    const cv = this.cvRef && this.cvRef.current;
+    if (!cv || !cv.getContext) { if (n < 50) this.retry = setTimeout(() => this.tryStart(n + 1), 100); return; }
+    this.runDots(cv);
+  }
+  buildShapes(N) {
+    let seed = 1337;
+    const rnd = () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+    const R = (a, b, c, d) => [[a, b, c, b], [c, b, c, d], [c, d, a, d], [a, d, a, b]];
+    const L = (a, b, c, d) => [[a, b, c, d]];
+    const P = (pts) => pts.map((p, i) => { const q = pts[(i + 1) % pts.length]; return [p[0], p[1], q[0], q[1]]; });
+    const E = (cx, cy, rx, ry, n) => { const o = []; for (let i = 0; i < n; i++) { const a = i / n * Math.PI * 2, b = (i + 1) / n * Math.PI * 2; o.push([cx + Math.cos(a) * rx, cy + Math.sin(a) * ry, cx + Math.cos(b) * rx, cy + Math.sin(b) * ry]); } return o; };
+    const mirror = (segs) => segs.map((s) => [1 - s[0], s[1], 1 - s[2], s[3]]);
+    const chair = [].concat(L(0.04, 0.30, 0.04, 0.86), R(0.02, 0.30, 0.06, 0.50), R(0.04, 0.60, 0.17, 0.63), L(0.16, 0.63, 0.16, 0.86));
+    const defs = [
+      [].concat(R(0.14, 0.06, 0.80, 0.94), P([[0.14, 0.06], [0.22, 0.01], [0.88, 0.01], [0.80, 0.06]]), P([[0.80, 0.06], [0.88, 0.01], [0.88, 0.89], [0.80, 0.94]]), L(0.47, 0.06, 0.47, 0.72), L(0.14, 0.72, 0.80, 0.72), L(0.47, 0.72, 0.47, 0.94), L(0.43, 0.34, 0.43, 0.46), L(0.51, 0.34, 0.51, 0.46), L(0.27, 0.83, 0.34, 0.83), L(0.60, 0.83, 0.67, 0.83), L(0.18, 0.94, 0.18, 0.98), L(0.76, 0.94, 0.76, 0.98)),
+      [].concat(R(0.04, 0.30, 0.12, 0.82), R(0.12, 0.56, 0.90, 0.68), R(0.12, 0.68, 0.92, 0.76), R(0.90, 0.48, 0.96, 0.82), E(0.24, 0.52, 0.09, 0.035, 28), L(0.40, 0.555, 0.90, 0.555), L(0.40, 0.555, 0.46, 0.68), L(0.16, 0.76, 0.16, 0.84), L(0.88, 0.76, 0.88, 0.84)),
+      [].concat(R(0.04, 0.08, 0.96, 0.36), L(0.35, 0.08, 0.35, 0.36), L(0.65, 0.08, 0.65, 0.36), L(0.16, 0.32, 0.23, 0.32), L(0.46, 0.32, 0.54, 0.32), L(0.77, 0.32, 0.84, 0.32), R(0.02, 0.56, 0.98, 0.59), R(0.04, 0.59, 0.96, 0.92), L(0.27, 0.59, 0.27, 0.92), L(0.50, 0.59, 0.50, 0.92), L(0.73, 0.59, 0.73, 0.92), L(0.12, 0.64, 0.19, 0.64), L(0.35, 0.64, 0.42, 0.64), L(0.58, 0.64, 0.65, 0.64), L(0.81, 0.64, 0.88, 0.64), E(0.66, 0.545, 0.05, 0.012, 18), E(0.82, 0.545, 0.05, 0.012, 18), L(0.26, 0.56, 0.26, 0.46), L(0.26, 0.46, 0.32, 0.46), L(0.32, 0.46, 0.32, 0.50)),
+      [].concat(R(0.22, 0.44, 0.78, 0.48), L(0.26, 0.48, 0.26, 0.86), L(0.74, 0.48, 0.74, 0.86), L(0.34, 0.48, 0.34, 0.80), L(0.66, 0.48, 0.66, 0.80), chair, mirror(chair), L(0.5, 0.02, 0.5, 0.16), P([[0.42, 0.26], [0.58, 0.26], [0.54, 0.16], [0.46, 0.16]]))
+    ];
+    return defs.map((segs) => {
+      const lens = segs.map((s) => Math.hypot(s[2] - s[0], s[3] - s[1]));
+      const tot = lens.reduce((a, b) => a + b, 0);
+      const arr = new Float32Array(N * 2);
+      let si = 0, acc = 0;
+      for (let j = 0; j < N; j++) {
+        const d = (j + 0.5) / N * tot;
+        while (si < segs.length - 1 && acc + lens[si] < d) { acc += lens[si]; si++; }
+        const sg = segs[si];
+        const u = lens[si] ? Math.min(1, (d - acc) / lens[si]) : 0;
+        arr[j * 2] = sg[0] + (sg[2] - sg[0]) * u - 0.5 + (rnd() - 0.5) * 0.006;
+        arr[j * 2 + 1] = sg[1] + (sg[3] - sg[1]) * u - 0.5 + (rnd() - 0.5) * 0.006;
+      }
+      for (let j = N - 1; j > 0; j--) {
+        const r = Math.floor(rnd() * (j + 1));
+        const tx = arr[j * 2], ty = arr[j * 2 + 1];
+        arr[j * 2] = arr[r * 2]; arr[j * 2 + 1] = arr[r * 2 + 1];
+        arr[r * 2] = tx; arr[r * 2 + 1] = ty;
+      }
+      return arr;
+    });
+  }
+  runDots(cv) {
+    const ctx = cv.getContext('2d');
+    const W = 390, H = 844, N = 900, M = 110;
+    const reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    const shapes = this.buildShapes(N);
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const px = new Float32Array(N), py = new Float32Array(N), vx = new Float32Array(N), vy = new Float32Array(N), z = new Float32Array(N), sd = new Float32Array(N), ac = new Uint8Array(N);
+    for (let i = 0; i < N; i++) { px[i] = Math.random() * W; py[i] = Math.random() * H; z[i] = 0.35 + Math.random() * 0.65; sd[i] = Math.random() * 6.283; ac[i] = Math.random() < 0.12 ? 1 : 0; }
+    const ax = new Float32Array(M), ay = new Float32Array(M), az = new Float32Array(M);
+    for (let k = 0; k < M; k++) { ax[k] = Math.random(); ay[k] = Math.random(); az[k] = 0.2 + Math.random() * 0.8; }
+    let mx = -9999, my = -9999;
+    const host = cv.parentElement || cv;
+    const toLocal = (e) => { const r = cv.getBoundingClientRect(); mx = (e.clientX - r.left) * (W / (r.width || W)); my = (e.clientY - r.top) * (H / (r.height || H)); };
+    const onMove = (e) => toLocal(e);
+    const onLeave = () => { mx = -9999; my = -9999; };
+    const onDown = (e) => {
+      toLocal(e); if (reduce) return;
+      for (let i = 0; i < N; i++) { const dx = px[i] - mx, dy = py[i] - my, d = Math.sqrt(dx * dx + dy * dy) || 1; if (d < 160) { const f = (1 - d / 160) * 14; vx[i] += dx / d * f; vy[i] += dy / d * f; } }
+    };
+    host.addEventListener('pointermove', onMove, { passive: true });
+    host.addEventListener('pointerdown', onDown, { passive: true });
+    host.addEventListener('pointerleave', onLeave);
+    this.cleanup = () => { host.removeEventListener('pointermove', onMove); host.removeEventListener('pointerdown', onDown); host.removeEventListener('pointerleave', onLeave); };
+    const smooth = (t) => t * t * (3 - 2 * t);
+    const period = 4.6, cx = W / 2, cy = 222, S = 300;
+    const t0 = performance.now();
+    let lastScene = 0;
+    const frame = (now) => {
+      if (this.dead) return;
+      const t = (now - t0) / 1000;
+      const accent = this.props.accent ?? '#4C8DFF';
+      const k = Math.floor(t / period), ph = (t % period) / period;
+      const a = k % 4, b = (k + 1) % 4;
+      const e = smooth(Math.max(0, Math.min(1, (ph - 0.72) / 0.28)));
+      const sceneNow = e > 0.5 ? b : a;
+      if (sceneNow !== lastScene) { lastScene = sceneNow; this.setState({ scene: sceneNow }); }
+      const A = shapes[a], B = shapes[b];
+      const burst = Math.sin(e * Math.PI);
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = '#FFFFFF';
+      for (let q = 0; q < M; q++) {
+        const zz = az[q];
+        let y = ay[q] * H - t * 10 * zz; y = ((y % H) + H) % H;
+        ctx.globalAlpha = (0.07 + zz * 0.28) * (0.65 + 0.35 * Math.sin(t * 1.3 + q));
+        const sz = 0.7 + zz * 1.0; ctx.fillRect(ax[q] * W, y, sz, sz);
+      }
+      const R = 110, R2 = R * R, kS = reduce ? 0.2 : 0.05, damp = 0.84, wob = reduce ? 0 : 1 + burst * 22;
+      const mouseOn = mx > -9000;
+      for (let i = 0; i < N; i++) {
+        let tx = cx + (A[i * 2] + (B[i * 2] - A[i * 2]) * e) * S;
+        let ty = cy + (A[i * 2 + 1] + (B[i * 2 + 1] - A[i * 2 + 1]) * e) * S;
+        if (wob) { tx += Math.sin(t * 0.9 + sd[i]) * wob; ty += Math.cos(t * 0.8 + sd[i] * 1.7) * wob; }
+        vx[i] += (tx - px[i]) * kS; vy[i] += (ty - py[i]) * kS;
+        if (mouseOn) { const dx = px[i] - mx, dy = py[i] - my, d2 = dx * dx + dy * dy; if (d2 < R2) { const d = Math.sqrt(d2) || 1, f = (1 - d / R) * 3.2; vx[i] += dx / d * f; vy[i] += dy / d * f; } }
+        vx[i] *= damp; vy[i] *= damp; px[i] += vx[i]; py[i] += vy[i];
+      }
+      for (let pass = 0; pass < 2; pass++) {
+        ctx.fillStyle = pass ? accent : '#FFFFFF';
+        for (let i = 0; i < N; i++) { if (ac[i] !== pass) continue; ctx.globalAlpha = 0.4 + z[i] * 0.55; const sz = 1 + z[i] * 1.3; ctx.fillRect(px[i] - sz / 2, py[i] - sz / 2, sz, sz); }
+      }
+      ctx.globalAlpha = 0.3; ctx.strokeStyle = '#FFFFFF'; ctx.lineWidth = 1; ctx.beginPath();
+      for (let i = 0; i < N; i++) { if (vx[i] * vx[i] + vy[i] * vy[i] > 5) { ctx.moveTo(px[i], py[i]); ctx.lineTo(px[i] - vx[i] * 3, py[i] - vy[i] * 3); } }
+      ctx.stroke(); ctx.globalAlpha = 1;
+      this.raf = requestAnimationFrame(frame);
+    };
+    this.raf = requestAnimationFrame(frame);
+  }
+}
+</script>
+</body>
+</html>

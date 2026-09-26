@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Кабинет — заказы</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&amp;family=Manrope:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#07080A;color:#EEF0F3;font-family:'Manrope',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#8FB4FF}a:hover{color:#C8DAFF}
+.dots{background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);background-size:18px 18px}
+.scroll{overflow-y:auto;scrollbar-width:none}
+.scroll::-webkit-scrollbar{display:none}
+@keyframes blink{50%{opacity:.25}}
+.pulse{animation:blink 1.4s infinite}
+.press{transition:transform .15s,background .25s}
+.press:active{transform:scale(.97)}
+</style>
+</helmet>
+<div class="dots" style="position: relative; width: 390px; height: 844px; overflow: hidden; background-color: #07080A; font-family: 'Manrope', system-ui, sans-serif; color: #EEF0F3; display: flex; flex-direction: column">
+
+<div class="scroll" style="flex-grow: 1; padding: 20px 16px 110px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: center; justify-content: space-between">
+<div style="display: flex; align-items: center; gap: 10px">
+<svg width="22" height="22" viewBox="0 0 28 28" aria-hidden="true"><g fill="#FFFFFF"><rect x="2" y="2" width="4" height="4"></rect><rect x="12" y="2" width="4" height="4"></rect><rect x="22" y="2" width="4" height="4" fill="{{accent}}"></rect><rect x="2" y="12" width="4" height="4"></rect><rect x="12" y="12" width="4" height="4"></rect><rect x="22" y="12" width="4" height="4"></rect><rect x="2" y="22" width="4" height="4"></rect><rect x="12" y="22" width="4" height="4"></rect><rect x="22" y="22" width="4" height="4"></rect></g></svg>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; color: #9AA1AC">КАБИНЕТ</span>
+</div>
+<button type="button" aria-label="Уведомления" style="position: relative; width: 44px; height: 44px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.14); background: rgba(12,14,18,0.8); color: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15zM10 20.5a2 2 0 0 0 4 0"></path></svg>
+<sc-if value="{{hasNew}}" hint-placeholder-val="{{true}}"><span class="pulse" style="position: absolute; top: 9px; right: 10px; width: 8px; height: 8px; border-radius: 50%; background: {{accent}}"></span></sc-if>
+</button>
+</div>
+
+<div>
+<div style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 24px; letter-spacing: -0.02em">Привет, [Имя]</div>
+<div style="color: #9AA1AC; font-size: 15px; margin-top: 4px">{{summary}}</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<div style="padding: 16px; border-radius: 18px; background: rgba(12,14,18,0.9); border: 1px solid rgba(255,255,255,0.1)">
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: #9AA1AC">НЕДЕЛЯ</div>
+<div style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 20px; margin-top: 8px">185 000 ₸</div>
+<div style="font-size: 12px; color: #9AA1AC; margin-top: 4px">9 заказов</div>
+</div>
+<div style="padding: 16px; border-radius: 18px; background: {{accent}}; color: #07080A">
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em">МЕСЯЦ</div>
+<div style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 20px; margin-top: 8px">640 000 ₸</div>
+<div style="font-size: 12px; margin-top: 4px">31 заказ</div>
+</div>
+</div>
+
+<sc-if value="{{hasNew}}" hint-placeholder-val="{{true}}">
+<div style="padding: 16px; border-radius: 18px; border: 1px solid {{accent}}; background: rgba(12,14,18,0.94); display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: center; justify-content: space-between">
+<span style="display: flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: {{accent}}"><span class="pulse" style="width: 7px; height: 7px; border-radius: 50%; background: {{accent}}"></span>НОВАЯ ЗАЯВКА</span>
+<span style="font-size: 12px; color: #9AA1AC">2 мин назад</span>
+</div>
+<div>
+<div style="font-weight: 700; font-size: 17px">Шкаф-купе · 2 шт</div>
+<div style="color: #A3A9B3; font-size: 14px; margin-top: 4px">[Адрес клиента] · 5 этаж, лифт есть</div>
+<div style="color: #A3A9B3; font-size: 14px; margin-top: 2px">Завтра, утро · 3 фото</div>
+</div>
+<div style="display: flex; gap: 8px">
+<button type="button" class="press" onClick="{{accept}}" style="flex-grow: 1; min-height: 46px; border-radius: 12px; border: 0; background: {{accent}}; color: #07080A; font: inherit; font-weight: 700; cursor: pointer">Принять</button>
+<button type="button" class="press" onClick="{{later}}" style="flex-grow: 1; min-height: 46px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.18); background: transparent; color: #FFFFFF; font: inherit; font-weight: 600; cursor: pointer">Позже</button>
+</div>
+</div>
+</sc-if>
+
+<div style="display: flex; padding: 4px; border-radius: 14px; background: rgba(12,14,18,0.9); border: 1px solid rgba(255,255,255,0.1)">
+<sc-for list="{{days}}" as="item" hint-placeholder-count="2">
+<button type="button" class="press" onClick="{{item.pick}}" aria-pressed="{{item.pressed}}" style="flex-grow: 1; min-height: 44px; border-radius: 10px; border: 0; background: {{item.bg}}; color: {{item.fg}}; font: inherit; font-weight: 700; font-size: 14px; cursor: pointer">{{item.label}}</button>
+</sc-for>
+</div>
+
+<sc-for list="{{orders}}" as="item" hint-placeholder-count="3">
+<div style="padding: 16px; border-radius: 18px; background: rgba(12,14,18,0.94); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px">
+<div style="display: flex; gap: 14px">
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 500; color: #FFFFFF">{{item.time}}</div>
+<div>
+<div style="font-weight: 700; font-size: 16px">{{item.what}}</div>
+<div style="color: #A3A9B3; font-size: 13px; margin-top: 3px">{{item.addr}}</div>
+<div style="color: #A3A9B3; font-size: 13px; margin-top: 2px">{{item.client}} · {{item.price}}</div>
+</div>
+</div>
+<span style="flex-shrink: 0; padding: 5px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; background: {{item.pillBg}}; color: {{item.pillFg}}">{{item.status}}</span>
+</div>
+<div style="display: flex; gap: 8px">
+<a href="tel:+70000000000" aria-label="Позвонить клиенту" style="width: 46px; height: 46px; flex-shrink: 0; border-radius: 12px; border: 1px solid rgba(255,255,255,0.16); display: flex; align-items: center; justify-content: center; color: #FFFFFF">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"></path></svg></a>
+<a href="#" aria-label="Открыть маршрут" style="width: 46px; height: 46px; flex-shrink: 0; border-radius: 12px; border: 1px solid rgba(255,255,255,0.16); display: flex; align-items: center; justify-content: center; color: #FFFFFF">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></a>
+<button type="button" class="press" onClick="{{item.next}}" style="flex-grow: 1; min-height: 46px; border-radius: 12px; border: 1px solid {{item.btnBd}}; background: {{item.btnBg}}; color: {{item.btnFg}}; font: inherit; font-weight: 700; font-size: 14px; cursor: pointer">{{item.btn}}</button>
+</div>
+</div>
+</sc-for>
+</div>
+
+<nav aria-label="Разделы кабинета" style="position: absolute; left: 12px; right: 12px; bottom: 14px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding: 6px; border-radius: 22px; background: rgba(12,14,18,0.92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,0.12)">
+<a href="#" aria-current="page" style="display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 0; border-radius: 16px; background: rgba(255,255,255,0.08); color: #FFFFFF; text-decoration: none; font-size: 11px; font-weight: 600">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"></rect><path d="M8 9h8M8 13h8M8 17h5"></path></svg>Заказы</a>
+<a href="#" style="display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 0; border-radius: 16px; color: #9AA1AC; text-decoration: none; font-size: 11px; font-weight: 600">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"></rect><path d="M4 10h16M9 3v4M15 3v4"></path></svg>Календарь</a>
+<a href="#" style="display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 0; border-radius: 16px; color: #9AA1AC; text-decoration: none; font-size: 11px; font-weight: 600">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="2"></rect><circle cx="12" cy="13" r="3.5"></circle><path d="M8 6l1.5-2h5L16 6"></path></svg>Фото работ</a>
+<a href="Prices.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 0; border-radius: 16px; color: #9AA1AC; text-decoration: none; font-size: 11px; font-weight: 600">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12l-8 8-9-9V3h8z"></path><circle cx="7.5" cy="7.5" r="1.5"></circle></svg>Цены</a>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#4C8DFF","options":["#4C8DFF","#FF7A1A","#2EE6A6","#FFFFFF"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const s = this.state || {};
+    const accent = this.props.accent ?? '#4C8DFF';
+    const base = {
+      today: [
+        { id: 't1', time: '10:00', what: 'Кухня · 1 комплект', addr: '[Адрес] · 3 этаж', client: 'Айгуль', price: '60 000 ₸' },
+        { id: 't2', time: '14:30', what: 'Кровать + 2 тумбы', addr: '[Адрес] · частный дом', client: 'Ерлан', price: '14 000 ₸' },
+        { id: 't3', time: '18:00', what: 'Детская стенка', addr: '[Адрес] · 7 этаж', client: 'Дина', price: '12 000 ₸' }
+      ],
+      tomorrow: [
+        { id: 'm1', time: '09:30', what: 'Шкаф распашной', addr: '[Адрес] · 2 этаж', client: 'Марат', price: '15 000 ₸' },
+        { id: 'm2', time: '13:00', what: 'Офис: 4 стола', addr: '[Адрес] · 1 этаж', client: 'ТОО [название]', price: '20 000 ₸' }
+      ]
+    };
+    const accepted = !!s.accepted;
+    if (accepted) base.tomorrow.unshift({ id: 'n1', time: '10:00', what: 'Шкаф-купе · 2 шт', addr: '[Адрес клиента] · 5 этаж', client: 'Новый клиент', price: '30 000 ₸' });
+    const day = s.day || 'today';
+    const st = s.st || {};
+    const names = ['Новый', 'Еду', 'Собираю', 'Готово'];
+    const nextLabel = ['Выехал', 'Начал сборку', 'Готово', 'Завершён ✓'];
+    const orders = base[day].map((o) => {
+      const v = st[o.id] || 0;
+      const done = v >= 3;
+      return {
+        ...o,
+        status: names[v],
+        pillBg: v === 0 ? 'rgba(255,255,255,0.1)' : done ? 'rgba(46,230,166,0.16)' : accent,
+        pillFg: v === 0 ? '#DDE1E7' : done ? '#2EE6A6' : '#07080A',
+        btn: nextLabel[v],
+        btnBg: done ? 'transparent' : 'rgba(255,255,255,0.06)',
+        btnFg: done ? '#2EE6A6' : '#FFFFFF',
+        btnBd: done ? 'rgba(46,230,166,0.4)' : 'rgba(255,255,255,0.16)',
+        next: () => { if (done) return; this.setState({ st: { ...st, [o.id]: v + 1 } }); }
+      };
+    });
+    const todayLeft = base.today.filter((o) => (st[o.id] || 0) < 3).length;
+    const dayDefs = [{ id: 'today', label: 'Сегодня · ' + base.today.length }, { id: 'tomorrow', label: 'Завтра · ' + base.tomorrow.length }];
+    return {
+      accent,
+      hasNew: !accepted && !s.dismissed,
+      accept: () => this.setState({ accepted: true, day: 'tomorrow' }),
+      later: () => this.setState({ dismissed: true }),
+      summary: todayLeft ? 'Сегодня осталось заказов: ' + todayLeft : 'На сегодня всё сделано',
+      days: dayDefs.map((d) => ({ ...d, pressed: d.id === day ? 'true' : 'false', bg: d.id === day ? '#FFFFFF' : 'transparent', fg: d.id === day ? '#07080A' : '#A3A9B3', pick: () => this.setState({ day: d.id }) })),
+      orders
+    };
+  }
+}
+</script>
+</body>
+</html>

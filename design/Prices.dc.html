@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Кабинет — цены</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&amp;family=Manrope:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#07080A;color:#EEF0F3;font-family:'Manrope',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#8FB4FF}a:hover{color:#C8DAFF}
+.dots{background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);background-size:18px 18px}
+.scroll{overflow-y:auto;scrollbar-width:none}
+.scroll::-webkit-scrollbar{display:none}
+.num{width:112px;box-sizing:border-box;padding:0 12px;height:44px;border-radius:12px;border:1px solid rgba(255,255,255,.16);background:#07080A;color:#FFFFFF;font-family:'JetBrains Mono',monospace;font-size:15px;text-align:right;outline:none;transition:border-color .2s}
+.num:focus{border-color:#4C8DFF}
+.num::-webkit-inner-spin-button{-webkit-appearance:none}
+.press{transition:transform .15s,background .25s,opacity .25s}
+.press:active{transform:scale(.97)}
+@keyframes pop{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.pop{animation:pop .4s cubic-bezier(.2,.8,.2,1) both}
+</style>
+</helmet>
+<div class="dots" style="position: relative; width: 390px; height: 844px; overflow: hidden; background-color: #07080A; font-family: 'Manrope', system-ui, sans-serif; color: #EEF0F3; display: flex; flex-direction: column">
+
+<div class="scroll" style="flex-grow: 1; padding: 20px 16px 190px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: center; gap: 12px">
+<a href="Admin.dc.html" aria-label="Назад к заказам" style="width: 44px; height: 44px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.14); background: rgba(12,14,18,0.8); color: #FFFFFF; display: flex; align-items: center; justify-content: center">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></a>
+<div>
+<div style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 22px; letter-spacing: -0.02em">Цены</div>
+<div style="color: #9AA1AC; font-size: 13px; margin-top: 2px">Меняете здесь — сразу меняется на сайте</div>
+</div>
+</div>
+
+<button type="button" class="press" onClick="{{toggleShow}}" aria-pressed="{{showP}}" style="display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px; padding: 0 16px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.12); background: rgba(12,14,18,0.94); color: #EEF0F3; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; text-align: left">
+<span>Показывать цены на сайте</span>
+<span style="position: relative; width: 44px; height: 26px; border-radius: 999px; background: {{showTrack}}; transition: background .3s; flex-shrink: 0"><span style="position: absolute; top: 3px; left: {{showKnob}}; width: 20px; height: 20px; border-radius: 50%; background: #FFFFFF; transition: left .3s"></span></span>
+</button>
+
+<div style="border-radius: 18px; border: 1px solid rgba(255,255,255,0.1); background: rgba(12,14,18,0.94); overflow: hidden">
+<div style="padding: 14px 16px 6px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: #9AA1AC">СБОРКА · ОТ, ЗА 1 ШТ</div>
+<sc-for list="{{rows}}" as="item" hint-placeholder-count="7">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 16px; border-top: 1px solid rgba(255,255,255,0.06)">
+<label for="{{item.fid}}" style="font-size: 15px; font-weight: 600">{{item.label}}</label>
+<div style="display: flex; align-items: center; gap: 8px">
+<input id="{{item.fid}}" class="num" type="number" inputmode="numeric" min="0" step="500" value="{{item.value}}" onChange="{{item.change}}">
+<span style="font-size: 14px; color: #9AA1AC; width: 12px">₸</span>
+</div>
+</div>
+</sc-for>
+</div>
+
+<div style="border-radius: 18px; border: 1px solid rgba(255,255,255,0.1); background: rgba(12,14,18,0.94); overflow: hidden">
+<div style="padding: 14px 16px 6px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: #9AA1AC">ДОПЛАТЫ</div>
+<sc-for list="{{extras}}" as="item" hint-placeholder-count="2">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 16px; border-top: 1px solid rgba(255,255,255,0.06)">
+<label for="{{item.fid}}" style="font-size: 14px; font-weight: 600; line-height: 1.3">{{item.label}}</label>
+<div style="display: flex; align-items: center; gap: 8px">
+<input id="{{item.fid}}" class="num" type="number" inputmode="numeric" min="0" step="{{item.step}}" value="{{item.value}}" onChange="{{item.change}}">
+<span style="font-size: 14px; color: #9AA1AC; width: 12px">{{item.unit}}</span>
+</div>
+</div>
+</sc-for>
+</div>
+
+<div style="padding: 16px; border-radius: 18px; border: 1px dashed rgba(255,255,255,0.2)">
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: #9AA1AC; margin-bottom: 12px">ТАК УВИДЯТ КЛИЕНТЫ</div>
+<sc-if value="{{show}}" hint-placeholder-val="{{true}}">
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<sc-for list="{{preview}}" as="item" hint-placeholder-count="4">
+<div style="padding: 12px; border-radius: 12px; background: rgba(255,255,255,0.04)">
+<div style="font-size: 13px; color: #A3A9B3">{{item.label}}</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #FFFFFF; margin-top: 4px">от {{item.value}} ₸</div>
+</div>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{hidden}}" hint-placeholder-val="{{false}}">
+<div style="font-size: 14px; color: #A3A9B3; line-height: 1.5">Вместо цен на сайте будет «Цена — по звонку», калькулятор скроется.</div>
+</sc-if>
+</div>
+</div>
+
+<div style="position: absolute; left: 12px; right: 12px; bottom: 14px; display: flex; flex-direction: column; gap: 8px">
+<sc-if value="{{saved}}" hint-placeholder-val="{{false}}">
+<div class="pop" role="status" style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 14px; background: rgba(46,230,166,0.14); border: 1px solid rgba(46,230,166,0.4); color: #2EE6A6; font-size: 14px; font-weight: 600">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+Сохранено — на сайте уже новые цены
+</div>
+</sc-if>
+<button type="button" class="press" onClick="{{save}}" style="min-height: 56px; border-radius: 16px; border: 0; background: {{saveBg}}; color: {{saveFg}}; font: inherit; font-weight: 700; font-size: 16px; cursor: pointer">{{saveLabel}}</button>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#4C8DFF","options":["#4C8DFF","#FF7A1A","#2EE6A6","#FFFFFF"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const s = this.state || {};
+    const accent = this.props.accent ?? '#4C8DFF';
+    const def = { wardrobe: 15000, kitchen: 60000, bed: 10000, table: 5000, kids: 12000, office: 8000, move: 7000, floorFee: 1000, disPct: 50 };
+    const p = { ...def, ...(s.p || {}) };
+    const dirty = !!s.dirty;
+    const set = (k) => (e) => {
+      const v = Math.max(0, Math.round(Number(e.target.value) || 0));
+      this.setState({ p: { ...p, [k]: v }, dirty: true, saved: false });
+    };
+    const fmt = (n) => n.toLocaleString('ru-RU');
+    const items = [
+      ['wardrobe', 'Шкаф'], ['kitchen', 'Кухня (комплект)'], ['bed', 'Кровать'], ['table', 'Стол / стулья'],
+      ['kids', 'Детская мебель'], ['office', 'Офисная мебель'], ['move', 'Разборка при переезде']
+    ];
+    const show = s.show === undefined ? true : s.show;
+    return {
+      accent,
+      rows: items.map(([k, label]) => ({ fid: 'pr-' + k, label, value: p[k], change: set(k) })),
+      extras: [
+        { fid: 'pr-floor', label: 'Подъём без лифта, за этаж', value: p.floorFee, unit: '₸', step: 100, change: set('floorFee') },
+        { fid: 'pr-dis', label: 'Разборка старой мебели', value: p.disPct, unit: '%', step: 5, change: set('disPct') }
+      ],
+      preview: items.slice(0, 4).map(([k, label]) => ({ label, value: fmt(p[k]) })),
+      show, hidden: !show,
+      showP: show ? 'true' : 'false',
+      showTrack: show ? accent : 'rgba(255,255,255,0.18)',
+      showKnob: show ? '21px' : '3px',
+      toggleShow: () => this.setState({ show: !show, dirty: true, saved: false }),
+      saved: !!s.saved,
+      saveLabel: dirty ? 'Сохранить изменения' : 'Всё сохранено',
+      saveBg: dirty ? accent : 'rgba(255,255,255,0.08)',
+      saveFg: dirty ? '#07080A' : '#9AA1AC',
+      save: () => { if (!dirty) return; this.setState({ dirty: false, saved: true }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

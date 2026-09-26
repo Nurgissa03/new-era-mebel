@@ -1,0 +1,784 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>New Era Mebel — сборка мебели</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&amp;family=Manrope:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#07080A;color:#EEF0F3;font-family:'Manrope',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#8FB4FF}a:hover{color:#C8DAFF}
+::selection{background:#4C8DFF;color:#07080A}
+.wrap{max-width:1240px;margin:0 auto;padding:0 40px;box-sizing:border-box;width:100%}
+.split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:56px;align-items:center}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{transition:transform .45s cubic-bezier(.2,.8,.2,1),border-color .45s,background .45s}
+.card:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.3)!important;background:rgba(18,21,27,.8)!important}
+.btn{transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 44px -12px rgba(76,141,255,.75)}
+.ghost{transition:background .3s,border-color .3s}
+.ghost:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.4)!important}
+.nl{color:#AEB4BE;text-decoration:none;font-size:14px;transition:color .2s}
+.nl:hover{color:#FFFFFF}
+.step{width:44px;height:44px;border-radius:12px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.02);color:#EEF0F3;font-size:20px;cursor:pointer;transition:background .2s}
+.step:hover{background:rgba(255,255,255,.08)}
+.fld{width:100%;box-sizing:border-box;padding:14px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:rgba(7,8,10,.6);color:#EEF0F3;font:inherit;font-size:15px;outline:none;transition:border-color .2s}
+.fld:focus{border-color:#4C8DFF}
+.fld::placeholder{color:#7C838E}
+.mobbar{display:none}
+.range{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+@keyframes up{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@keyframes blink{50%{opacity:.25}}
+@keyframes drop{0%{transform:translateY(-6px);opacity:0}40%{opacity:1}100%{transform:translateY(18px);opacity:0}}
+.i1{animation:up 1s .15s cubic-bezier(.2,.8,.2,1) both}
+.i2{animation:up 1s .3s cubic-bezier(.2,.8,.2,1) both}
+.i3{animation:up 1s .45s cubic-bezier(.2,.8,.2,1) both}
+.i4{animation:up 1s .6s cubic-bezier(.2,.8,.2,1) both}
+.pulse{animation:blink 1.6s infinite}
+.drop{animation:drop 1.8s infinite}
+@media (max-width:900px){.split,.g3,.g2{grid-template-columns:minmax(0,1fr)}.stage{display:none}.navlinks{display:none!important}.mobbar{display:flex!important}.h1{font-size:42px!important}.h2{font-size:32px!important}.wrap{padding:0 20px}}
+@media (prefers-reduced-motion:reduce){.i1,.i2,.i3,.i4,.pulse,.drop{animation:none}}
+</style>
+</helmet>
+<div style="position: relative; width: 100%; min-height: 100vh; background: #07080A; overflow-x: clip">
+<canvas ref="{{cvRef}}" aria-hidden="true" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 0; display: block"></canvas>
+
+<header style="position: fixed; top: 0; left: 0; right: 0; z-index: 20; background: rgba(7,8,10,0.62); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,0.07)">
+<div class="wrap" style="display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 24px">
+<a href="#top" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #FFFFFF">
+<svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><g fill="#FFFFFF"><rect x="2" y="2" width="4" height="4"></rect><rect x="12" y="2" width="4" height="4"></rect><rect x="22" y="2" width="4" height="4" fill="{{accent}}"></rect><rect x="2" y="12" width="4" height="4"></rect><rect x="12" y="12" width="4" height="4"></rect><rect x="22" y="12" width="4" height="4"></rect><rect x="2" y="22" width="4" height="4"></rect><rect x="12" y="22" width="4" height="4"></rect><rect x="22" y="22" width="4" height="4"></rect></g></svg>
+<span style="display: flex; flex-direction: column; line-height: 1">
+<span style="font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 16px; letter-spacing: 0.02em">NEW ERA</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.32em; color: #9AA1AC; margin-top: 4px">MEBEL</span>
+</span>
+</a>
+<nav class="navlinks" aria-label="Разделы" style="display: flex; gap: 28px">
+<a class="nl" href="#services">Услуги</a>
+<a class="nl" href="#calc">Цены</a>
+<a class="nl" href="#works">Работы</a>
+<a class="nl" href="#status">Мой заказ</a>
+<a class="nl" href="#faq">Вопросы</a>
+</nav>
+<a class="btn" href="#order" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: 999px; background: {{accent}}; color: #07080A; font-weight: 700; font-size: 14px; text-decoration: none">Оставить заявку</a>
+</div>
+</header>
+
+<main id="top" style="position: relative; z-index: 1">
+
+<section data-scene="wardrobe" data-side="right" style="position: relative; min-height: 100vh; display: flex; align-items: center">
+<div class="wrap split" style="padding-top: 120px; padding-bottom: 100px">
+<div>
+<div class="i1" style="display: inline-flex; align-items: center; gap: 10px; padding: 8px 14px; border: 1px solid rgba(255,255,255,0.14); border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.08em; color: #C5CAD2; background: rgba(7,8,10,0.5)">
+<span class="pulse" style="width: 8px; height: 8px; border-radius: 50%; background: {{accent}}"></span>
+ТУРКЕСТАН · СБОРКА МЕБЕЛИ
+</div>
+<h1 class="h1 i2" style="font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 72px; line-height: 1.02; letter-spacing: -0.035em; margin: 28px 0 24px">Соберём мебель<br>точно<span style="color: {{accent}}">.</span></h1>
+<p class="i3" style="font-size: 19px; line-height: 1.6; color: #B4BAC4; margin: 0; max-width: 500px">Семейная бригада — отец и сын. Шкафы, кухни, кровати и всё, что приехало в коробках. Аккуратно, по инструкции, без спешки.</p>
+<div class="i4" style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px">
+<a class="btn" href="#calc" style="display: inline-flex; align-items: center; gap: 10px; min-height: 56px; padding: 0 28px; border-radius: 999px; background: {{accent}}; color: #07080A; font-weight: 700; font-size: 16px; text-decoration: none">Рассчитать стоимость
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+<a class="ghost" href="tel:+70000000000" style="display: inline-flex; align-items: center; gap: 10px; min-height: 56px; padding: 0 26px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.22); color: #FFFFFF; font-weight: 600; font-size: 16px; text-decoration: none">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"></path></svg>Позвонить</a>
+</div>
+<div class="i4" style="display: flex; flex-wrap: wrap; gap: 28px; margin-top: 48px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #9AA1AC">
+<span><span style="color: #FFFFFF; font-size: 15px">[N] лет</span><br>опыта сборки</span>
+<span><span style="color: #FFFFFF; font-size: 15px">Свой</span><br>инструмент</span>
+<span><span style="color: #FFFFFF; font-size: 15px">Весь</span><br>город</span>
+</div>
+</div>
+<div class="stage" style="height: 560px"></div>
+</div>
+<div style="position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; color: #8A919C">
+ЛИСТАЙТЕ — МЕБЕЛЬ СОБЕРЁТСЯ
+<span style="position: relative; width: 1px; height: 40px; background: rgba(255,255,255,0.15); overflow: hidden"><span class="drop" style="position: absolute; left: -1px; top: 0; width: 3px; height: 12px; background: {{accent}}"></span></span>
+</div>
+</section>
+
+<section id="services" data-scene="scatter" style="padding: 140px 0">
+<div class="wrap">
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.14em; color: {{accent}}">01 — УСЛУГИ</div>
+<h2 class="h2" style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 48px; letter-spacing: -0.03em; line-height: 1.1; margin: 16px 0 56px; max-width: 720px">Соберём всё, что пришло в коробках</h2>
+<div class="g3">
+<div class="card" style="padding: 32px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); background: rgba(12,14,18,0.72); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px)">
+<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="17"></rect><path d="M12 3v17M10 10v3M14 10v3M6 20v1.5M18 20v1.5"></path></svg>
+<h3 style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 20px; margin: 24px 0 10px">Шкафы и гардеробные</h3>
+<p style="margin: 0; color: #A3A9B3; line-height: 1.6; font-size: 15px">Распашные, купе, встроенные. Навесим двери и выставим по уровню.</p>
+<div style="margin-top: 24px; font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #FFFFFF">от {{price.wardrobe}} ₸</div>
+</div>
+<div class="card" style="padding: 32px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); background: rgba(12,14,18,0.72); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px)">
+<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="6"></rect><rect x="3" y="12" width="18" height="9"></rect><path d="M9 12v9M15 12v9M5 11h14"></path></svg>
+<h3 style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 20px; margin: 24px 0 10px">Кухни</h3>
+<p style="margin: 0; color: #A3A9B3; line-height: 1.6; font-size: 15px">Нижние и верхние модули, столешница, фасады, ручки.</p>
+<div style="margin-top: 24px; font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #FFFFFF">от {{price.kitchen}} ₸</div>
+</div>
+<div class="card" style="padding: 32px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); background: rgba(12,14,18,0.72); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px)">
+<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 19V7M3 14h18v5M21 19v-5M3 11h18"></path><rect x="5" y="8" width="5" height="3"></rect></svg>
+<h3 style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 20px; margin: 24px 0 10px">Кровати</h3>
+<p style="margin: 0; color: #A3A9B3; line-height: 1.6; font-size: 15px">С подъёмным механизмом, двухъярусные, диваны-кровати.</p>
+<div style="margin-top: 24px; font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #FFFFFF">от {{price.bed}} ₸</div>
+</div>
+<div class="card" style="padding: 32px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); background: rgba(12,14,18,0.72); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px)">
+<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9h18M6 9v11M18 9v11M8 9v8M16 9v8"></path></svg>
+<h3 style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 20px; margin: 24px 0 10px">Столы и стулья</h3>
+<p style="margin: 0; color: #A3A9B3; line-height: 1.6; font-size: 15px">Обеденные, письменные, компьютерные — быстро и крепко.</p>
+<div style="margin-top: 24px; font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #FFFFFF">от {{price.table}} ₸</div>
+</div>
+<div class="card" style="padding: 32px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); background: rgba(12,14,18,0.72); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px)">
+<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="13" width="7" height="7"></rect><rect x="13" y="13" width="7" height="7"></rect><rect x="8.5" y="5" width="7" height="7"></rect></svg>
+<h3 style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 20px; margin: 24px 0 10px">Детская мебель</h3>
+<p style="margin: 0; color: #A3A9B3; line-height: 1.6; font-size: 15px">Стенки, кроватки, столы. Крепим к стене, чтобы ничего не упало.</p>
+<div style="margin-top: 24px; font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #FFFFFF">от {{price.kids}} ₸</div>
+</div>
+<div class="card" style="padding: 32px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); background: rgba(12,14,18,0.72); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px)">
+<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="13" height="12"></rect><path d="M3 12h13M16 14h5M19 12l2 2-2 2"></path></svg>
+<h3 style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 20px; margin: 24px 0 10px">Разборка при переезде</h3>
+<p style="margin: 0; color: #A3A9B3; line-height: 1.6; font-size: 15px">Аккуратно разберём, подпишем детали и соберём на новом месте.</p>
+<div style="margin-top: 24px; font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #FFFFFF">от {{price.move}} ₸</div>
+</div>
+</div>
+</div>
+</section>
+
+<section data-scene="bed" data-side="left" style="padding: 140px 0; min-height: 80vh; display: flex; align-items: center">
+<div class="wrap split">
+<div class="stage" style="height: 520px"></div>
+<div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.14em; color: {{accent}}">02 — КАК ЭТО РАБОТАЕТ</div>
+<h2 class="h2" style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 48px; letter-spacing: -0.03em; line-height: 1.1; margin: 16px 0 40px">Четыре шага — и мебель стоит</h2>
+<ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0">
+<li style="display: flex; gap: 24px; padding: 24px 0; border-top: 1px solid rgba(255,255,255,0.1)">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: {{accent}}; min-width: 32px">01</span>
+<span><span style="display: block; font-size: 19px; font-weight: 700">Заявка</span><span style="display: block; color: #A3A9B3; margin-top: 6px; line-height: 1.6">Выберите мебель, дату и прикрепите фото коробок — одна минута.</span></span>
+</li>
+<li style="display: flex; gap: 24px; padding: 24px 0; border-top: 1px solid rgba(255,255,255,0.1)">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: {{accent}}; min-width: 32px">02</span>
+<span><span style="display: block; font-size: 19px; font-weight: 700">Звонок</span><span style="display: block; color: #A3A9B3; margin-top: 6px; line-height: 1.6">Перезвоним, уточним детали и назовём точную цену.</span></span>
+</li>
+<li style="display: flex; gap: 24px; padding: 24px 0; border-top: 1px solid rgba(255,255,255,0.1)">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: {{accent}}; min-width: 32px">03</span>
+<span><span style="display: block; font-size: 19px; font-weight: 700">Сборка</span><span style="display: block; color: #A3A9B3; margin-top: 6px; line-height: 1.6">Приезжаем в назначенное время со своим инструментом.</span></span>
+</li>
+<li style="display: flex; gap: 24px; padding: 24px 0; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1)">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: {{accent}}; min-width: 32px">04</span>
+<span><span style="display: block; font-size: 19px; font-weight: 700">Проверка</span><span style="display: block; color: #A3A9B3; margin-top: 6px; line-height: 1.6">Проверяем двери и ящики вместе с вами. Оплата — после.</span></span>
+</li>
+</ol>
+</div>
+</div>
+</section>
+
+<section id="calc" data-scene="kitchen" data-side="right" style="padding: 140px 0; min-height: 90vh; display: flex; align-items: center">
+<div class="wrap split">
+<div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.14em; color: {{accent}}">03 — КАЛЬКУЛЯТОР</div>
+<h2 class="h2" style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 48px; letter-spacing: -0.03em; line-height: 1.1; margin: 16px 0 32px">Сколько это стоит?</h2>
+<div style="padding: 32px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.12); background: rgba(12,14,18,0.78); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); display: flex; flex-direction: column; gap: 28px">
+<div>
+<div style="font-size: 13px; color: #9AA1AC; margin-bottom: 12px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.06em">ЧТО СОБРАТЬ</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{types}}" as="item" hint-placeholder-count="6">
+<button type="button" onClick="{{item.pick}}" aria-pressed="{{item.pressed}}" style="min-height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid {{item.bd}}; background: {{item.bg}}; color: {{item.fg}}; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; transition: background .25s, color .25s">{{item.label}}</button>
+</sc-for>
+</div>
+</div>
+<div class="g2" style="gap: 24px">
+<div>
+<div style="font-size: 13px; color: #9AA1AC; margin-bottom: 12px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.06em">КОЛИЧЕСТВО</div>
+<div style="display: flex; align-items: center; gap: 12px">
+<button type="button" class="step" onClick="{{qtyDown}}" aria-label="Меньше">−</button>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 22px; min-width: 36px; text-align: center">{{qty}}</span>
+<button type="button" class="step" onClick="{{qtyUp}}" aria-label="Больше">+</button>
+</div>
+</div>
+<div>
+<div style="font-size: 13px; color: #9AA1AC; margin-bottom: 12px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.06em">ЭТАЖ</div>
+<div style="display: flex; align-items: center; gap: 12px">
+<button type="button" class="step" onClick="{{floorDown}}" aria-label="Ниже">−</button>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 22px; min-width: 36px; text-align: center">{{floor}}</span>
+<button type="button" class="step" onClick="{{floorUp}}" aria-label="Выше">+</button>
+</div>
+</div>
+</div>
+<div class="g2" style="gap: 12px">
+<button type="button" onClick="{{toggleLift}}" aria-pressed="{{liftP}}" style="display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px; padding: 0 16px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.02); color: #EEF0F3; font: inherit; font-size: 15px; cursor: pointer">
+<span>Есть лифт</span>
+<span style="position: relative; width: 44px; height: 26px; border-radius: 999px; background: {{liftTrack}}; transition: background .3s; flex-shrink: 0"><span style="position: absolute; top: 3px; left: {{liftKnob}}; width: 20px; height: 20px; border-radius: 50%; background: #FFFFFF; transition: left .3s"></span></span>
+</button>
+<button type="button" onClick="{{toggleDis}}" aria-pressed="{{disP}}" style="display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px; padding: 0 16px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.02); color: #EEF0F3; font: inherit; font-size: 15px; cursor: pointer">
+<span>Нужна разборка старой</span>
+<span style="position: relative; width: 44px; height: 26px; border-radius: 999px; background: {{disTrack}}; transition: background .3s; flex-shrink: 0"><span style="position: absolute; top: 3px; left: {{disKnob}}; width: 20px; height: 20px; border-radius: 50%; background: #FFFFFF; transition: left .3s"></span></span>
+</button>
+</div>
+<div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; padding-top: 24px; border-top: 1px dashed rgba(255,255,255,0.16)">
+<div>
+<div style="font-size: 13px; color: #9AA1AC; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.06em">ПРИМЕРНО</div>
+<div style="font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 44px; letter-spacing: -0.03em; margin-top: 6px">≈ {{total}} <span style="color: {{accent}}">₸</span></div>
+<div style="font-size: 13px; color: #8A919C; margin-top: 6px">Цены актуальные — точную сумму подтвердим по телефону</div>
+</div>
+<a class="btn" href="#order" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 24px; border-radius: 999px; background: {{accent}}; color: #07080A; font-weight: 700; text-decoration: none">Оформить заявку</a>
+</div>
+</div>
+</div>
+<div class="stage" style="height: 560px"></div>
+</div>
+</section>
+
+<section id="works" data-scene="scatter" style="padding: 140px 0">
+<div class="wrap">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 40px">
+<div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.14em; color: {{accent}}">04 — НАШИ РАБОТЫ</div>
+<h2 class="h2" style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 48px; letter-spacing: -0.03em; line-height: 1.1; margin: 16px 0 0">До и после</h2>
+</div>
+<div style="display: flex; gap: 8px; flex-wrap: wrap">
+<sc-for list="{{projects}}" as="item" hint-placeholder-count="3">
+<button type="button" onClick="{{item.pick}}" aria-pressed="{{item.pressed}}" style="min-height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid {{item.bd}}; background: {{item.bg}}; color: {{item.fg}}; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer">{{item.label}}</button>
+</sc-for>
+</div>
+</div>
+<div style="position: relative; height: 540px; border-radius: 24px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12); background: #0C0E12; user-select: none">
+<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.025) 0 12px, transparent 12px 24px)">
+<svg width="320" height="260" viewBox="0 0 320 260" fill="none" stroke="#8A919C" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M30 150h120v90H30zM30 150l20-22h120l-20 22M150 150l20-22v90l-20 22M170 170h120v70H170zM170 170l16-18h120l-16 18M290 170l16-18v70l-16 18M80 60h140v68H80zM80 60l18-20h140l-18 20M220 60l18-20v68l-18 20M75 150v-10h40v10"></path></svg>
+<div style="position: absolute; left: 28px; bottom: 28px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.14em; color: #C5CAD2; padding: 8px 12px; border-radius: 8px; background: rgba(7,8,10,0.7)">ДО · [ФОТО КОРОБОК]</div>
+</div>
+<div style="position: absolute; inset: 0; clip-path: {{clip}}; display: flex; align-items: center; justify-content: center; background: #11141A; background-image: radial-gradient(rgba(255,255,255,0.09) 1px, transparent 1px); background-size: 18px 18px">
+<svg width="300" height="360" viewBox="0 0 300 360" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M40 30h200v300H40zM40 30l24-16h200l-24 16M240 30l24-16v296l-24 20M140 30v230M40 260h200M140 260v70M128 130v34M152 130v34M80 295h26M174 295h26"></path></svg>
+<div style="position: absolute; right: 28px; bottom: 28px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.14em; color: #07080A; padding: 8px 12px; border-radius: 8px; background: {{accent}}">ПОСЛЕ · {{projectName}}</div>
+</div>
+<div aria-hidden="true" style="position: absolute; top: 0; bottom: 0; left: {{posPct}}; width: 2px; margin-left: -1px; background: #FFFFFF; pointer-events: none">
+<span style="position: absolute; top: 50%; left: 50%; width: 52px; height: 52px; margin: -26px 0 0 -26px; border-radius: 50%; background: #FFFFFF; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 8px rgba(255,255,255,0.12)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#07080A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"></path></svg></span>
+</div>
+<label for="ba" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Сравнить до и после</label>
+<input id="ba" class="range" type="range" min="0" max="100" value="{{pos}}" onChange="{{setPos}}">
+</div>
+</div>
+</section>
+
+<section id="status" data-scene="scatter" style="padding: 100px 0">
+<div class="wrap split" style="align-items: start">
+<div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.14em; color: {{accent}}">05 — МОЙ ЗАКАЗ</div>
+<h2 class="h2" style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 48px; letter-spacing: -0.03em; line-height: 1.1; margin: 16px 0 20px">Где мастера сейчас?</h2>
+<p style="color: #A3A9B3; line-height: 1.6; font-size: 17px; margin: 0 0 28px; max-width: 460px">Введите номер телефона из заявки — покажем, на каком этапе ваш заказ.</p>
+<div style="display: flex; gap: 10px; max-width: 480px">
+<label for="ph" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Номер телефона</label>
+<input id="ph" class="fld" type="tel" placeholder="+7 ___ ___ __ __" value="{{phone}}" onChange="{{setPhone}}">
+<button type="button" class="btn" onClick="{{check}}" style="min-height: 50px; padding: 0 22px; border-radius: 12px; border: 0; background: {{accent}}; color: #07080A; font: inherit; font-weight: 700; cursor: pointer; white-space: nowrap">Проверить</button>
+</div>
+</div>
+<div style="padding: 32px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.12); background: rgba(12,14,18,0.78); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); min-height: 300px; box-sizing: border-box">
+<sc-if value="{{checked}}" hint-placeholder-val="{{true}}">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #9AA1AC">ЗАКАЗ № [0000]</span>
+<span style="font-size: 14px; color: #C5CAD2">Сегодня, [время]</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 0">
+<sc-for list="{{steps}}" as="item" hint-placeholder-count="4">
+<div style="display: flex; gap: 18px; align-items: flex-start">
+<div style="display: flex; flex-direction: column; align-items: center">
+<span class="{{item.cls}}" style="width: 16px; height: 16px; border-radius: 50%; border: 2px solid {{item.ring}}; background: {{item.fill}}; box-sizing: border-box"></span>
+<span style="width: 2px; height: 36px; background: {{item.line}}"></span>
+</div>
+<div style="margin-top: -3px">
+<div style="font-weight: 700; font-size: 17px; color: {{item.fg}}">{{item.label}}</div>
+<div style="font-size: 14px; color: #8A919C; margin-top: 2px">{{item.note}}</div>
+</div>
+</div>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{notChecked}}" hint-placeholder-val="{{false}}">
+<div style="height: 236px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; color: #8A919C; text-align: center">
+<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+Здесь появится статус заказа
+</div>
+</sc-if>
+</div>
+</div>
+</section>
+
+<section data-scene="scatter" style="padding: 100px 0">
+<div class="wrap">
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.14em; color: {{accent}}">06 — ОТЗЫВЫ</div>
+<h2 class="h2" style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 48px; letter-spacing: -0.03em; line-height: 1.1; margin: 16px 0 48px">Что говорят клиенты</h2>
+<div class="g3">
+<figure class="card" style="margin: 0; padding: 32px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); background: rgba(12,14,18,0.72); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px)">
+<blockquote style="margin: 0; font-size: 17px; line-height: 1.6; color: #DDE1E7">«[Текст отзыва клиента — появится после первых заказов]»</blockquote>
+<figcaption style="margin-top: 24px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #9AA1AC">[Имя] · [что собирали]</figcaption>
+</figure>
+<figure class="card" style="margin: 0; padding: 32px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); background: rgba(12,14,18,0.72); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px)">
+<blockquote style="margin: 0; font-size: 17px; line-height: 1.6; color: #DDE1E7">«[Текст отзыва клиента]»</blockquote>
+<figcaption style="margin-top: 24px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #9AA1AC">[Имя] · [что собирали]</figcaption>
+</figure>
+<figure class="card" style="margin: 0; padding: 32px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); background: rgba(12,14,18,0.72); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px)">
+<blockquote style="margin: 0; font-size: 17px; line-height: 1.6; color: #DDE1E7">«[Текст отзыва клиента]»</blockquote>
+<figcaption style="margin-top: 24px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #9AA1AC">[Имя] · [что собирали]</figcaption>
+</figure>
+</div>
+</div>
+</section>
+
+<section data-scene="table" data-side="left" style="padding: 140px 0; min-height: 80vh; display: flex; align-items: center">
+<div class="wrap split">
+<div class="stage" style="height: 520px"></div>
+<div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.14em; color: {{accent}}">07 — О НАС</div>
+<h2 class="h2" style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 48px; letter-spacing: -0.03em; line-height: 1.1; margin: 16px 0 20px">Отец и сын</h2>
+<p style="color: #A3A9B3; line-height: 1.7; font-size: 17px; margin: 0 0 32px">Мы не компания с диспетчерами — мы семья. Приезжаем сами, собираем сами и отвечаем за каждый шуруп.</p>
+<div class="g2">
+<div class="card" style="padding: 20px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); background: rgba(12,14,18,0.72)">
+<div style="height: 180px; border-radius: 14px; background: rgba(255,255,255,0.03); border: 1px dashed rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8A919C">[ФОТО]</div>
+<div style="font-weight: 700; font-size: 18px; margin-top: 16px">[Имя отца]</div>
+<div style="color: #9AA1AC; font-size: 14px; margin-top: 4px">Мастер · [N] лет опыта</div>
+</div>
+<div class="card" style="padding: 20px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); background: rgba(12,14,18,0.72)">
+<div style="height: 180px; border-radius: 14px; background: rgba(255,255,255,0.03); border: 1px dashed rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8A919C">[ФОТО]</div>
+<div style="font-weight: 700; font-size: 18px; margin-top: 16px">[Имя брата]</div>
+<div style="color: #9AA1AC; font-size: 14px; margin-top: 4px">Мастер · заказы и связь</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="faq" data-scene="scatter" style="padding: 120px 0">
+<div class="wrap" style="max-width: 900px">
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.14em; color: {{accent}}">08 — ВОПРОСЫ</div>
+<h2 class="h2" style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 48px; letter-spacing: -0.03em; line-height: 1.1; margin: 16px 0 40px">Частые вопросы</h2>
+<div style="display: flex; flex-direction: column; border-top: 1px solid rgba(255,255,255,0.12)">
+<sc-for list="{{faqs}}" as="item" hint-placeholder-count="5">
+<div style="border-bottom: 1px solid rgba(255,255,255,0.12); background: rgba(7,8,10,0.55)">
+<button type="button" onClick="{{item.toggle}}" aria-expanded="{{item.expanded}}" style="width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 24px 4px; min-height: 56px; background: transparent; border: 0; color: #EEF0F3; font: inherit; font-size: 18px; font-weight: 600; text-align: left; cursor: pointer">
+{{item.q}}
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex-shrink: 0; transform: {{item.rot}}; transition: transform .35s"><path d="M12 5v14M5 12h14"></path></svg>
+</button>
+<sc-if value="{{item.open}}" hint-placeholder-val="{{false}}">
+<p style="margin: 0; padding: 0 4px 24px; color: #A3A9B3; line-height: 1.7; font-size: 16px; max-width: 720px">{{item.a}}</p>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section id="order" data-scene="bolt" data-side="right" style="padding: 140px 0; min-height: 100vh; display: flex; align-items: center">
+<div class="wrap split">
+<div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.14em; color: {{accent}}">09 — ЗАЯВКА</div>
+<h2 class="h2" style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 48px; letter-spacing: -0.03em; line-height: 1.1; margin: 16px 0 32px">Оставьте заявку — перезвоним</h2>
+<sc-if value="{{notSent}}" hint-placeholder-val="{{true}}">
+<form onSubmit="{{submit}}" style="padding: 32px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.12); background: rgba(12,14,18,0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); display: flex; flex-direction: column; gap: 16px">
+<div class="g2">
+<div><label for="f1" style="display: block; font-size: 13px; color: #9AA1AC; margin-bottom: 8px">Имя</label><input id="f1" class="fld" type="text" placeholder="Как к вам обращаться"></div>
+<div><label for="f2" style="display: block; font-size: 13px; color: #9AA1AC; margin-bottom: 8px">Телефон</label><input id="f2" class="fld" type="tel" placeholder="+7 ___ ___ __ __"></div>
+</div>
+<div><label for="f3" style="display: block; font-size: 13px; color: #9AA1AC; margin-bottom: 8px">Адрес</label><input id="f3" class="fld" type="text" placeholder="Улица, дом, квартира, этаж"></div>
+<div class="g2">
+<div><label for="f4" style="display: block; font-size: 13px; color: #9AA1AC; margin-bottom: 8px">Дата</label><input id="f4" class="fld" type="date"></div>
+<div><label for="f5" style="display: block; font-size: 13px; color: #9AA1AC; margin-bottom: 8px">Время</label><select id="f5" class="fld"><option>Утро · 9–12</option><option>День · 12–16</option><option>Вечер · 16–20</option></select></div>
+</div>
+<div><label for="f6" style="display: block; font-size: 13px; color: #9AA1AC; margin-bottom: 8px">Что собрать</label><select id="f6" class="fld"><option>Шкаф</option><option>Кухня</option><option>Кровать</option><option>Стол / стулья</option><option>Детская мебель</option><option>Разборка при переезде</option><option>Другое</option></select></div>
+<div><label for="f7" style="display: block; font-size: 13px; color: #9AA1AC; margin-bottom: 8px">Фото мебели или коробок</label><input id="f7" class="fld" type="file" accept="image/*" multiple style="padding: 12px"></div>
+<div><label for="f8" style="display: block; font-size: 13px; color: #9AA1AC; margin-bottom: 8px">Комментарий</label><textarea id="f8" class="fld" rows="3" placeholder="Например: нужен ещё монтаж полки"></textarea></div>
+<button type="submit" class="btn" style="min-height: 56px; border-radius: 999px; border: 0; background: {{accent}}; color: #07080A; font: inherit; font-weight: 700; font-size: 16px; cursor: pointer; margin-top: 8px">Отправить заявку</button>
+</form>
+</sc-if>
+<sc-if value="{{sent}}" hint-placeholder-val="{{false}}">
+<div style="padding: 48px 32px; border-radius: 24px; border: 1px solid {{accent}}; background: rgba(12,14,18,0.85); text-align: center">
+<svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M7.5 12.5l3 3 6-6.5"></path></svg>
+<div style="font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 26px; margin-top: 20px">Заявка отправлена</div>
+<p style="color: #A3A9B3; line-height: 1.6; margin: 12px 0 28px">Перезвоним в течение [N] минут, чтобы подтвердить время.</p>
+<button type="button" class="ghost" onClick="{{reset}}" style="min-height: 48px; padding: 0 22px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.22); background: transparent; color: #FFFFFF; font: inherit; font-weight: 600; cursor: pointer">Отправить ещё одну</button>
+</div>
+</sc-if>
+</div>
+<div class="stage" style="height: 560px"></div>
+</div>
+</section>
+
+<footer style="position: relative; padding: 56px 0 120px; border-top: 1px solid rgba(255,255,255,0.08); background: rgba(7,8,10,0.85)">
+<div class="wrap" style="display: flex; justify-content: space-between; align-items: flex-start; gap: 32px; flex-wrap: wrap">
+<div>
+<div style="font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 22px">NEW ERA <span style="color: {{accent}}">MEBEL</span></div>
+<div style="color: #9AA1AC; margin-top: 8px; font-size: 14px">Сборка мебели · Туркестан</div>
+</div>
+<div style="display: flex; gap: 40px; flex-wrap: wrap; font-size: 15px">
+<div><div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8A919C; margin-bottom: 8px">ТЕЛЕФОН</div><a href="tel:+70000000000">[+7 ___ ___ __ __]</a></div>
+<div><div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8A919C; margin-bottom: 8px">WHATSAPP</div><a href="#top">Написать</a></div>
+<div><div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8A919C; margin-bottom: 8px">РАБОТАЕМ</div><span style="color: #DDE1E7">[Дни и часы]</span></div>
+</div>
+</div>
+</footer>
+</main>
+
+<div class="mobbar" style="position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 30; gap: 8px; padding: 8px; border-radius: 999px; background: rgba(12,14,18,0.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,0.12)">
+<a href="tel:+70000000000" style="flex-grow: 1; display: flex; align-items: center; justify-content: center; min-height: 48px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.2); color: #FFFFFF; font-weight: 600; text-decoration: none">Позвонить</a>
+<a href="#order" style="flex-grow: 1; display: flex; align-items: center; justify-content: center; min-height: 48px; border-radius: 999px; background: {{accent}}; color: #07080A; font-weight: 700; text-decoration: none">Заявка</a>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#4C8DFF","options":["#4C8DFF","#FF7A1A","#2EE6A6","#FFFFFF"]},"dotCount":{"editor":"range","default":1500,"min":600,"max":2600,"step":100,"section":"Точки"},"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    if (!this.cvRef) this.cvRef = { current: null };
+    const s = this.state || {};
+    const accent = this.props.accent ?? '#4C8DFF';
+    const on = { bg: accent, fg: '#07080A', bd: accent };
+    const off = { bg: 'rgba(255,255,255,0.03)', fg: '#D5D9E0', bd: 'rgba(255,255,255,0.16)' };
+    // Цены приходят из кабинета брата (экран «Цены»). Здесь — пример того, что он туда вписал.
+    const prices = { wardrobe: 15000, kitchen: 60000, bed: 10000, table: 5000, kids: 12000, office: 8000, move: 7000, floorFee: 1000, disPct: 50 };
+    const types = [
+      { id: 'wardrobe', label: 'Шкаф', rate: prices.wardrobe },
+      { id: 'kitchen', label: 'Кухня', rate: prices.kitchen },
+      { id: 'bed', label: 'Кровать', rate: prices.bed },
+      { id: 'table', label: 'Стол / стулья', rate: prices.table },
+      { id: 'kids', label: 'Детская', rate: prices.kids },
+      { id: 'office', label: 'Офисная', rate: prices.office }
+    ];
+    const type = s.type || 'wardrobe';
+    const qty = s.qty || 1;
+    const floor = s.floor || 1;
+    const lift = s.lift === undefined ? true : s.lift;
+    const dis = !!s.dis;
+    const cur = types.find((x) => x.id === type) || types[0];
+    let total = cur.rate * qty;
+    if (!lift && floor > 1) total += (floor - 1) * prices.floorFee * qty;
+    if (dis) total += Math.round(cur.rate * prices.disPct / 100) * qty;
+    const fmt = (n) => n.toLocaleString('ru-RU');
+    const price = {};
+    Object.keys(prices).forEach((k) => { price[k] = fmt(prices[k]); });
+
+    const projects = [
+      { id: 'p1', label: 'Шкаф-купе' },
+      { id: 'p2', label: 'Кухня' },
+      { id: 'p3', label: 'Детская' }
+    ];
+    const proj = s.proj || 'p1';
+    const pos = s.pos === undefined ? 52 : s.pos;
+
+    const checked = !!s.checked;
+    const stepDefs = [
+      { label: 'Заявка принята', note: 'Подтвердили по телефону' },
+      { label: 'Мастера выехали', note: 'Будут через ~[N] минут' },
+      { label: 'Идёт сборка', note: 'Работаем у вас' },
+      { label: 'Готово', note: 'Проверяем вместе с вами' }
+    ];
+    const active = 2;
+    const steps = stepDefs.map((d, i) => ({
+      ...d,
+      ring: i <= active ? accent : 'rgba(255,255,255,0.25)',
+      fill: i < active ? accent : 'transparent',
+      line: i === stepDefs.length - 1 ? 'transparent' : (i < active ? accent : 'rgba(255,255,255,0.12)'),
+      fg: i <= active ? '#FFFFFF' : '#7C838E',
+      cls: i === active ? 'pulse' : ''
+    }));
+
+    const faqDefs = [
+      { q: 'Сколько длится сборка?', a: 'Зависит от мебели: шкаф — обычно [N] часа, кухня — [N] часов. Точное время скажем, когда увидим фото.' },
+      { q: 'Нужно ли что-то подготовить?', a: 'Освободите место, где будет стоять мебель, и не выбрасывайте инструкцию и пакеты с фурнитурой. Инструмент у нас свой.' },
+      { q: 'Как оплатить?', a: 'После сборки и проверки — наличными или переводом [укажите способы].' },
+      { q: 'Есть ли гарантия?', a: 'Да, на нашу сборку — [срок гарантии]. Если что-то разболтается, приедем и подтянем.' },
+      { q: 'Вывозите упаковку?', a: '[Да / нет / за доплату — укажите, как у вас принято].' }
+    ];
+    const faqOpen = s.faq === undefined ? 0 : s.faq;
+    const faqs = faqDefs.map((d, i) => ({
+      ...d,
+      open: faqOpen === i,
+      expanded: faqOpen === i ? 'true' : 'false',
+      rot: faqOpen === i ? 'rotate(45deg)' : 'rotate(0deg)',
+      toggle: () => this.setState({ faq: faqOpen === i ? -1 : i })
+    }));
+
+    return {
+      cvRef: this.cvRef,
+      accent,
+      price,
+      types: types.map((x) => ({ ...x, ...(x.id === type ? on : off), pressed: x.id === type ? 'true' : 'false', pick: () => this.setState({ type: x.id }) })),
+      qty, floor,
+      qtyUp: () => this.setState({ qty: Math.min(20, qty + 1) }),
+      qtyDown: () => this.setState({ qty: Math.max(1, qty - 1) }),
+      floorUp: () => this.setState({ floor: Math.min(30, floor + 1) }),
+      floorDown: () => this.setState({ floor: Math.max(1, floor - 1) }),
+      toggleLift: () => this.setState({ lift: !lift }),
+      toggleDis: () => this.setState({ dis: !dis }),
+      liftP: lift ? 'true' : 'false', disP: dis ? 'true' : 'false',
+      liftTrack: lift ? accent : 'rgba(255,255,255,0.18)', liftKnob: lift ? '21px' : '3px',
+      disTrack: dis ? accent : 'rgba(255,255,255,0.18)', disKnob: dis ? '21px' : '3px',
+      total: total.toLocaleString('ru-RU'),
+      projects: projects.map((x) => ({ ...x, ...(x.id === proj ? on : off), pressed: x.id === proj ? 'true' : 'false', pick: () => this.setState({ proj: x.id, pos: 52 }) })),
+      projectName: (projects.find((x) => x.id === proj) || projects[0]).label.toUpperCase(),
+      pos, posPct: pos + '%', clip: 'inset(0 0 0 ' + pos + '%)',
+      setPos: (e) => this.setState({ pos: Number(e.target.value) }),
+      phone: s.phone || '',
+      setPhone: (e) => this.setState({ phone: e.target.value }),
+      check: () => this.setState({ checked: true }),
+      checked, notChecked: !checked, steps,
+      faqs,
+      sent: !!s.sent, notSent: !s.sent,
+      submit: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ sent: true }); },
+      reset: () => this.setState({ sent: false })
+    };
+  }
+
+  componentDidMount() {
+    this.dead = false;
+    this.tryStart(0);
+  }
+
+  componentWillUnmount() {
+    this.dead = true;
+    if (this.raf) cancelAnimationFrame(this.raf);
+    if (this.retry) clearTimeout(this.retry);
+    if (this.cleanup) this.cleanup();
+  }
+
+  tryStart(n) {
+    const cv = this.cvRef && this.cvRef.current;
+    if (!cv || !cv.getContext) {
+      if (n < 50) this.retry = setTimeout(() => this.tryStart(n + 1), 100);
+      return;
+    }
+    this.runDots(cv);
+  }
+
+  buildShapes(N) {
+    let seed = 1337;
+    const rnd = () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+    const R = (a, b, c, d) => [[a, b, c, b], [c, b, c, d], [c, d, a, d], [a, d, a, b]];
+    const L = (a, b, c, d) => [[a, b, c, d]];
+    const P = (pts) => pts.map((p, i) => { const q = pts[(i + 1) % pts.length]; return [p[0], p[1], q[0], q[1]]; });
+    const E = (cx, cy, rx, ry, n) => { const o = []; for (let i = 0; i < n; i++) { const a = i / n * Math.PI * 2, b = (i + 1) / n * Math.PI * 2; o.push([cx + Math.cos(a) * rx, cy + Math.sin(a) * ry, cx + Math.cos(b) * rx, cy + Math.sin(b) * ry]); } return o; };
+    const mirror = (segs) => segs.map((s) => [1 - s[0], s[1], 1 - s[2], s[3]]);
+    const chair = [].concat(L(0.04, 0.30, 0.04, 0.86), R(0.02, 0.30, 0.06, 0.50), R(0.04, 0.60, 0.17, 0.63), L(0.16, 0.63, 0.16, 0.86));
+    const hex = []; for (let i = 0; i < 6; i++) { const a = i / 6 * Math.PI * 2 + Math.PI / 6; hex.push([0.5 + Math.cos(a) * 0.44, 0.5 + Math.sin(a) * 0.44]); }
+    const defs = {
+      wardrobe: [].concat(
+        R(0.14, 0.06, 0.80, 0.94),
+        P([[0.14, 0.06], [0.22, 0.01], [0.88, 0.01], [0.80, 0.06]]),
+        P([[0.80, 0.06], [0.88, 0.01], [0.88, 0.89], [0.80, 0.94]]),
+        L(0.47, 0.06, 0.47, 0.72), L(0.14, 0.72, 0.80, 0.72), L(0.47, 0.72, 0.47, 0.94),
+        L(0.43, 0.34, 0.43, 0.46), L(0.51, 0.34, 0.51, 0.46),
+        L(0.27, 0.83, 0.34, 0.83), L(0.60, 0.83, 0.67, 0.83),
+        L(0.18, 0.94, 0.18, 0.98), L(0.76, 0.94, 0.76, 0.98)
+      ),
+      bed: [].concat(
+        R(0.04, 0.30, 0.12, 0.82), R(0.12, 0.56, 0.90, 0.68), R(0.12, 0.68, 0.92, 0.76), R(0.90, 0.48, 0.96, 0.82),
+        E(0.24, 0.52, 0.09, 0.035, 28), L(0.40, 0.555, 0.90, 0.555), L(0.40, 0.555, 0.46, 0.68),
+        L(0.16, 0.76, 0.16, 0.84), L(0.88, 0.76, 0.88, 0.84)
+      ),
+      kitchen: [].concat(
+        R(0.04, 0.08, 0.96, 0.36), L(0.35, 0.08, 0.35, 0.36), L(0.65, 0.08, 0.65, 0.36),
+        L(0.16, 0.32, 0.23, 0.32), L(0.46, 0.32, 0.54, 0.32), L(0.77, 0.32, 0.84, 0.32),
+        R(0.02, 0.56, 0.98, 0.59), R(0.04, 0.59, 0.96, 0.92),
+        L(0.27, 0.59, 0.27, 0.92), L(0.50, 0.59, 0.50, 0.92), L(0.73, 0.59, 0.73, 0.92),
+        L(0.12, 0.64, 0.19, 0.64), L(0.35, 0.64, 0.42, 0.64), L(0.58, 0.64, 0.65, 0.64), L(0.81, 0.64, 0.88, 0.64),
+        E(0.66, 0.545, 0.05, 0.012, 18), E(0.82, 0.545, 0.05, 0.012, 18),
+        L(0.26, 0.56, 0.26, 0.46), L(0.26, 0.46, 0.32, 0.46), L(0.32, 0.46, 0.32, 0.50)
+      ),
+      table: [].concat(
+        R(0.22, 0.44, 0.78, 0.48), L(0.26, 0.48, 0.26, 0.86), L(0.74, 0.48, 0.74, 0.86), L(0.34, 0.48, 0.34, 0.80), L(0.66, 0.48, 0.66, 0.80),
+        chair, mirror(chair),
+        L(0.5, 0.02, 0.5, 0.16), P([[0.42, 0.26], [0.58, 0.26], [0.54, 0.16], [0.46, 0.16]])
+      ),
+      bolt: [].concat(P(hex), E(0.5, 0.5, 0.37, 0.37, 60), E(0.5, 0.5, 0.2, 0.2, 40))
+    };
+    const out = {};
+    Object.keys(defs).forEach((k) => {
+      const segs = defs[k];
+      const lens = segs.map((s) => Math.hypot(s[2] - s[0], s[3] - s[1]));
+      const tot = lens.reduce((a, b) => a + b, 0);
+      const arr = new Float32Array(N * 2);
+      let si = 0, acc = 0;
+      for (let j = 0; j < N; j++) {
+        const d = (j + 0.5) / N * tot;
+        while (si < segs.length - 1 && acc + lens[si] < d) { acc += lens[si]; si++; }
+        const sg = segs[si];
+        const u = lens[si] ? Math.min(1, (d - acc) / lens[si]) : 0;
+        arr[j * 2] = sg[0] + (sg[2] - sg[0]) * u - 0.5 + (rnd() - 0.5) * 0.006;
+        arr[j * 2 + 1] = sg[1] + (sg[3] - sg[1]) * u - 0.5 + (rnd() - 0.5) * 0.006;
+      }
+      for (let j = N - 1; j > 0; j--) {
+        const r = Math.floor(rnd() * (j + 1));
+        const tx = arr[j * 2], ty = arr[j * 2 + 1];
+        arr[j * 2] = arr[r * 2]; arr[j * 2 + 1] = arr[r * 2 + 1];
+        arr[r * 2] = tx; arr[r * 2 + 1] = ty;
+      }
+      out[k] = arr;
+    });
+    return out;
+  }
+
+  readScenes() {
+    const els = document.querySelectorAll('[data-scene]');
+    this.secs = Array.prototype.map.call(els, (el) => ({ el, shape: el.getAttribute('data-scene'), side: el.getAttribute('data-side') || 'right' }));
+  }
+
+  runDots(cv) {
+    const ctx = cv.getContext('2d');
+    const N = Math.max(300, Math.min(3000, Math.round(this.props.dotCount ?? 1500)));
+    const M = 240;
+    const reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    const shapes = this.buildShapes(N);
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let W = 0, H = 0;
+    const resize = () => {
+      W = window.innerWidth || 1440; H = window.innerHeight || 900;
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    resize();
+    const px = new Float32Array(N), py = new Float32Array(N), vx = new Float32Array(N), vy = new Float32Array(N);
+    const z = new Float32Array(N), sd = new Float32Array(N), sx = new Float32Array(N), sy = new Float32Array(N), ac = new Uint8Array(N);
+    for (let i = 0; i < N; i++) {
+      px[i] = Math.random() * W; py[i] = Math.random() * H;
+      z[i] = 0.35 + Math.random() * 0.65; sd[i] = Math.random() * 6.283;
+      sx[i] = Math.random(); sy[i] = Math.random(); ac[i] = Math.random() < 0.12 ? 1 : 0;
+    }
+    const ax = new Float32Array(M), ay = new Float32Array(M), az = new Float32Array(M);
+    for (let k = 0; k < M; k++) { ax[k] = Math.random(); ay[k] = Math.random(); az[k] = 0.2 + Math.random() * 0.8; }
+    let mx = -9999, my = -9999, prevTop = null, frameN = 0;
+    const onMove = (e) => { mx = e.clientX; my = e.clientY; };
+    const onLeave = () => { mx = -9999; my = -9999; };
+    const onDown = (e) => {
+      if (reduce) return;
+      const cx = e.clientX, cy = e.clientY;
+      for (let i = 0; i < N; i++) {
+        const dx = px[i] - cx, dy = py[i] - cy, d = Math.sqrt(dx * dx + dy * dy) || 1;
+        if (d < 200) { const f = (1 - d / 200) * 16; vx[i] += dx / d * f; vy[i] += dy / d * f; }
+      }
+    };
+    window.addEventListener('pointermove', onMove, { passive: true });
+    window.addEventListener('pointerdown', onDown, { passive: true });
+    document.addEventListener('pointerleave', onLeave);
+    window.addEventListener('blur', onLeave);
+    window.addEventListener('resize', resize);
+    this.cleanup = () => {
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('pointerdown', onDown);
+      document.removeEventListener('pointerleave', onLeave);
+      window.removeEventListener('blur', onLeave);
+      window.removeEventListener('resize', resize);
+    };
+    this.readScenes();
+    const smooth = (t) => t * t * (3 - 2 * t);
+    const place = (d) => {
+      if (!d || d.shape === 'scatter' || !shapes[d.shape]) return { scatter: true };
+      const narrow = W < 900;
+      const half = Math.min(W, 1240) / 2;
+      const S = narrow ? Math.min(W * 0.82, H * 0.46) : Math.min(H * 0.64, W * 0.34);
+      const cx = narrow ? W * 0.5 : (d.side === 'left' ? W / 2 - half * 0.5 : d.side === 'center' ? W / 2 : W / 2 + half * 0.5);
+      const cy = narrow ? H * 0.5 : H * 0.54;
+      return { scatter: false, arr: shapes[d.shape], cx, cy, S };
+    };
+    const t0 = performance.now();
+    const frame = (now) => {
+      if (this.dead) return;
+      frameN++;
+      if (frameN % 90 === 0 || !this.secs.length || !this.secs[0].el.isConnected) this.readScenes();
+      const t = (now - t0) / 1000;
+      const accent = this.props.accent ?? '#4C8DFF';
+      const secs = this.secs;
+      let A = null, B = null, e = 0, top0 = 0;
+      if (secs.length) {
+        const mid = H / 2;
+        let last = -1; const cs = [];
+        for (let k = 0; k < secs.length; k++) {
+          const r = secs[k].el.getBoundingClientRect();
+          if (k === 0) top0 = r.top;
+          cs[k] = r.top + r.height / 2 - mid;
+          if (cs[k] <= 0) last = k;
+        }
+        if (last < 0) { A = B = secs[0]; }
+        else if (last >= secs.length - 1) { A = B = secs[secs.length - 1]; }
+        else {
+          A = secs[last]; B = secs[last + 1];
+          const tt = -cs[last] / (cs[last + 1] - cs[last]);
+          e = smooth(Math.max(0, Math.min(1, (tt - 0.25) / 0.5)));
+        }
+      } else { A = B = { shape: 'wardrobe', side: 'right' }; }
+      let sv = prevTop === null ? 0 : prevTop - top0;
+      prevTop = top0;
+      if (reduce) sv = 0;
+      sv = Math.max(-70, Math.min(70, sv));
+      const scroll = -top0;
+      const pa = place(A), pb = place(B);
+      const scat = (pa.scatter ? 1 - e : 0) + (pb.scatter ? e : 0);
+      let alphaMul = 0.95 - scat * 0.6;
+      if (W < 900) alphaMul *= 0.5;
+
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = '#FFFFFF';
+      for (let k = 0; k < M; k++) {
+        const zz = az[k];
+        let y = ay[k] * H - scroll * zz * 0.35 - t * 6 * zz;
+        y = ((y % H) + H) % H;
+        const x = ax[k] * W + (mx > -9000 ? (mx - W / 2) * -0.02 * zz : 0);
+        ctx.globalAlpha = (0.07 + zz * 0.28) * (0.65 + 0.35 * Math.sin(t * 1.3 + k));
+        const sz = 0.7 + zz * 1.1;
+        ctx.fillRect(x, y, sz, sz);
+      }
+
+      const R = 130, R2 = R * R;
+      const kS = reduce ? 0.2 : 0.05, damp = 0.84;
+      const wob = reduce ? 0 : 1.1 + scat * 14;
+      const near = [];
+      const mouseOn = mx > -9000;
+      for (let i = 0; i < N; i++) {
+        let tax, tay, tbx, tby;
+        if (pa.scatter) { tax = sx[i] * W; tay = sy[i] * H; } else { tax = pa.cx + pa.arr[i * 2] * pa.S; tay = pa.cy + pa.arr[i * 2 + 1] * pa.S; }
+        if (pb.scatter) { tbx = sx[i] * W; tby = sy[i] * H; } else { tbx = pb.cx + pb.arr[i * 2] * pb.S; tby = pb.cy + pb.arr[i * 2 + 1] * pb.S; }
+        let tx = tax + (tbx - tax) * e, ty = tay + (tby - tay) * e;
+        if (wob) { tx += Math.sin(t * 0.7 + sd[i]) * wob; ty += Math.cos(t * 0.6 + sd[i] * 1.7) * wob; }
+        vx[i] += (tx - px[i]) * kS; vy[i] += (ty - py[i]) * kS;
+        py[i] -= sv * z[i] * 0.8;
+        if (mouseOn) {
+          const dx = px[i] - mx, dy = py[i] - my, d2 = dx * dx + dy * dy;
+          if (d2 < R2) {
+            const d = Math.sqrt(d2) || 1, f = (1 - d / R) * 3.4;
+            vx[i] += dx / d * f; vy[i] += dy / d * f;
+            if (near.length < 26 && d > 30) near.push(i);
+          }
+        }
+        vx[i] *= damp; vy[i] *= damp;
+        px[i] += vx[i]; py[i] += vy[i];
+      }
+      for (let pass = 0; pass < 2; pass++) {
+        ctx.fillStyle = pass ? accent : '#FFFFFF';
+        for (let i = 0; i < N; i++) {
+          if (ac[i] !== pass) continue;
+          ctx.globalAlpha = alphaMul * (0.4 + z[i] * 0.6);
+          const sz = 1.1 + z[i] * 1.4;
+          ctx.fillRect(px[i] - sz / 2, py[i] - sz / 2, sz, sz);
+        }
+      }
+      ctx.globalAlpha = 0.3 * alphaMul;
+      ctx.strokeStyle = '#FFFFFF'; ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (let i = 0; i < N; i++) {
+        const sp = vx[i] * vx[i] + vy[i] * vy[i];
+        if (sp > 5) { ctx.moveTo(px[i], py[i]); ctx.lineTo(px[i] - vx[i] * 3, py[i] - vy[i] * 3); }
+      }
+      ctx.stroke();
+      if (near.length) {
+        ctx.strokeStyle = accent; ctx.globalAlpha = 0.3;
+        ctx.beginPath();
+        for (let n = 0; n < near.length; n++) { ctx.moveTo(mx, my); ctx.lineTo(px[near[n]], py[near[n]]); }
+        ctx.stroke();
+        ctx.globalAlpha = 0.9; ctx.beginPath(); ctx.arc(mx, my, 3, 0, Math.PI * 2); ctx.fillStyle = accent; ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      this.raf = requestAnimationFrame(frame);
+    };
+    this.raf = requestAnimationFrame(frame);
+  }
+}
+</script>
+</body>
+</html>

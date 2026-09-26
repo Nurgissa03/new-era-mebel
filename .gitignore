@@ -1,0 +1,16 @@
+# Зависимости и сборка
+node_modules/
+dist/
+
+# Ключи — никогда не публикуем
+.env
+.env.local
+.env.*.local
+
+# Служебное
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+supabase/.temp/
