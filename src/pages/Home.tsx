@@ -1,41 +1,57 @@
-import Logo from '../components/Logo';
+import { useState } from 'react';
+import DotsCanvas from '../components/DotsCanvas';
+import { SiteDataProvider } from '../data/SiteDataContext';
+import type { ItemType } from '../data/types';
+import { CALC_DEFAULT, type CalcState } from '../lib/calc';
+import { load, save } from '../lib/storage';
+import About from '../sections/About';
+import Calculator from '../sections/Calculator';
+import Faq from '../sections/Faq';
+import Footer from '../sections/Footer';
+import Header from '../sections/Header';
+import Hero from '../sections/Hero';
+import HowItWorks from '../sections/HowItWorks';
+import MobileBar from '../sections/MobileBar';
+import OrderForm from '../sections/OrderForm';
+import OrderStatus, { type LastOrder } from '../sections/OrderStatus';
+import Reviews from '../sections/Reviews';
+import Services from '../sections/Services';
+import Works from '../sections/Works';
+import '../styles/site.css';
 
-/** Временная главная — этап 2. Полный дизайн появится на этапе 3. */
+const LAST_ORDER_KEY = 'nem:lastOrder';
+
 export default function Home() {
+  // Калькулятор и заявка связаны: «Оформить заявку» переносит выбор в форму
+  const [calc, setCalc] = useState<CalcState>(CALC_DEFAULT);
+  const [orderItem, setOrderItem] = useState<ItemType>(CALC_DEFAULT.type);
+  const [lastOrder, setLastOrder] = useState<LastOrder | null>(() => load<LastOrder>(LAST_ORDER_KEY));
+
+  const onSent = (o: LastOrder) => {
+    setLastOrder(o);
+    save(LAST_ORDER_KEY, o);
+  };
+
   return (
-    <main
-      className="wrap"
-      style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 24 }}
-    >
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-        <Logo />
-        <span style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
-          <span style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 16 }}>NEW ERA</span>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: '0.32em', color: 'var(--muted-2)', marginTop: 4 }}>
-            MEBEL
-          </span>
-        </span>
+    <SiteDataProvider>
+      <div className="site">
+        <DotsCanvas />
+        <Header />
+        <main id="top">
+          <Hero />
+          <Services />
+          <HowItWorks />
+          <Calculator calc={calc} setCalc={setCalc} onOrder={() => setOrderItem(calc.type)} />
+          <Works />
+          <OrderStatus lastOrder={lastOrder} />
+          <Reviews />
+          <About />
+          <Faq />
+          <OrderForm calc={calc} item={orderItem} setItem={setOrderItem} onSent={onSent} />
+          <Footer />
+        </main>
+        <MobileBar />
       </div>
-      <h1
-        style={{
-          fontFamily: 'var(--font-display)',
-          fontWeight: 800,
-          fontSize: 'clamp(40px, 7vw, 72px)',
-          lineHeight: 1.02,
-          letterSpacing: '-0.035em',
-          margin: 0,
-        }}
-      >
-        Соберём мебель
-        <br />
-        точно<span style={{ color: 'var(--accent)' }}>.</span>
-      </h1>
-      <p style={{ color: 'var(--text-soft)', fontSize: 19, lineHeight: 1.6, margin: 0, maxWidth: 500 }}>
-        Сайт в разработке. Скоро здесь будет всё: цены, калькулятор и заявка.
-      </p>
-      <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--muted-3)', letterSpacing: '0.1em' }}>
-        ТУРКЕСТАН · СБОРКА МЕБЕЛИ
-      </div>
-    </main>
+    </SiteDataProvider>
   );
 }
